@@ -2,185 +2,291 @@
    Sanctuary theme — SAP Analytics Cloud custom CSS
    ------------------------------------------------------------
    HOW TO USE
-   1. Story (optimized/enhanced mode): toolbar › Edit CSS — paste this.
-      Or Theme Preferences › "Enable Theme CSS" to package it into a
-      reusable theme, then "Reload Story CSS" after edits.
-   2. Set "sanctuary" as the Global Default Class Name in the canvas
-      Styling panel (Application Settings) so every widget inherits it.
-   3. Apply the modifier classes (sanctuary-btn--primary,
-      sanctuary-card, …) per widget via Styling panel › CSS Class Name.
+   1. Story (optimized mode): toolbar › Edit CSS — paste this. Or
+      Theme Preferences › "Enable Theme CSS" to package it into a
+      reusable theme; "Reload Story CSS" after edits.
+   2. Canvas Styling panel › Application Settings › Global Default
+      Class Name = "sanctuary" so every widget inherits the defaults.
+   3. Apply the use-case classes per widget via its Styling panel ›
+      CSS Class Name (e.g. "sanctuary-btn--primary").
 
    SAC CSS RULES (per SAP docs)
    - !important is NOT supported.
    - The custom class name must come FIRST in every selector.
-   - Only selectors listed in the CSS editor's dropdown are supported
-     per widget; verify against your tenant version (2026.x).
-   - When a custom class is used alone (e.g. ".sanctuary"), only
-     background-color and border are allowed.
-   - Widget-specific classes override the global default class.
-   - Tables in optimized presentation mode may ignore some properties.
+   - A custom class used ALONE (no element selector) supports only
+     background-color and border* (panels also accept border-radius
+     and box-shadow — same as SAP's Horizon card classes).
+   - Only properties listed for each selector in the CSS editor's
+     dropdown are applied; anything else is silently ignored.
+     Verify against your tenant (2026.x) — coverage grows by version.
+   - Fonts: set Hanken Grotesk / Source Sans 3 as theme fonts in the
+     theme editor (custom fonts), NOT via CSS font-family.
+   - Tables: style via the theme editor's table section (see
+     Sanctuary.sactheme.json); optimized-mode tables ignore most CSS.
    ============================================================ */
 
-/* ---- Global default class: canvas ------------------------- */
-/* Alone: only background-color / border are allowed. */
+/* ============ GLOBAL DEFAULT CLASS ========================== */
+/* Canvas — class alone: background-color / border only */
 .sanctuary {
-    background-color: #FDFDF5; /* Sanctuary cream canvas — use #FFFFFF for pure white */
-  }
-  
-  /* ---- Buttons ----------------------------------------------- */
-  /* Global default button = Sanctuary secondary style */
-  .sanctuary .sap-custom-button {
-    color: #0D5257;
-    background-color: #FFFFFF;
-    border-color: #B4B7B8;
-    border-radius: 5px;
-    font-family: 'Hanken Grotesk', '72', Arial, sans-serif;
-    font-weight: 700;
-  }
-  .sanctuary .sap-custom-button:hover {
-    color: #0D5257;
-    background-color: #F1F1EC;
-    border-color: #B4B7B8;
-  }
-  .sanctuary .sap-custom-button:active {
-    color: #0D5257;
-    background-color: #E7E8E5;
-    border-color: #307FE2;
-  }
-  
-  /* Primary action — apply class "sanctuary-btn--primary" to the widget */
-  .sanctuary-btn--primary .sap-custom-button {
-    color: #FFFFFF;
-    background-color: #307FE2;
-    border-color: #307FE2;
-    border-radius: 5px;
-    font-weight: 700;
-  }
-  .sanctuary-btn--primary .sap-custom-button:hover {
-    color: #FFFFFF;
-    background-color: #1F62B8;
-    border-color: #1F62B8;
-  }
-  .sanctuary-btn--primary .sap-custom-button:active {
-    color: #307FE2;
-    background-color: #FFFFFF;
-    border-color: #307FE2;
-  }
-  
-  /* Dark-teal emphasis — "sanctuary-btn--teal" */
-  .sanctuary-btn--teal .sap-custom-button {
-    color: #FDFDF5;
-    background-color: #0D5257;
-    border-color: #0D5257;
-    border-radius: 5px;
-    font-weight: 700;
-  }
-  .sanctuary-btn--teal .sap-custom-button:hover {
-    color: #FDFDF5;
-    background-color: #0A4146;
-    border-color: #0A4146;
-  }
-  
-  /* Low-emphasis / ghost — "sanctuary-btn--lite" */
-  .sanctuary-btn--lite .sap-custom-button {
-    color: #307FE2;
-    background-color: transparent;
-    border-color: transparent;
-    border-radius: 5px;
-    font-weight: 700;
-  }
-  .sanctuary-btn--lite .sap-custom-button:hover {
-    color: #1F62B8;
-    background-color: #E3EDFF;
-    border-color: transparent;
-  }
-  
-  /* ---- Chart text -------------------------------------------- */
-  .sanctuary .sap-custom-chart-title {
-    fill: #1A1A1A;
-    font-family: 'Hanken Grotesk', '72', Arial, sans-serif;
-    font-weight: bold;
-    font-size: 15px;
-  }
-  .sanctuary .sap-custom-chart-subtitle {
-    fill: #5C5F61;
-    font-size: 13px;
-  }
-  
-  /* ---- Text widgets ------------------------------------------ */
-  .sanctuary .sap-custom-text {
-    color: #3D3F40;
-    font-family: 'Source Sans 3', '72', Arial, sans-serif;
-  }
-  /* Headline text widgets — "sanctuary-h1" */
-  .sanctuary-h1 .sap-custom-text {
-    color: #1A1A1A;
-    font-family: 'Hanken Grotesk', '72', Arial, sans-serif;
-    font-weight: 800;
-  }
-  /* Eyebrow / kicker — "sanctuary-eyebrow" */
-  .sanctuary-eyebrow .sap-custom-text {
-    color: #5C5F61;
-    font-family: 'Hanken Grotesk', '72', Arial, sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  
-  /* ---- Content cards (Panels / Flow Layout Panels) ------------ */
-  /* Apply "sanctuary-card" to panels that should read as tiles.   */
-  .sanctuary-card {
-    background-color: #FFFFFF;
-    border: 1px solid #E7E8E5;
-    border-radius: 14px;
-    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
-  }
-  /* Section-accent variants (top rules echo the report sections) */
-  .sanctuary-card--financial {
-    background-color: #FFFFFF;
-    border: 1px solid #E7E8E5;
-    border-top: 3px solid #0D5257;
-    border-radius: 14px;
-    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
-  }
-  .sanctuary-card--strategic {
-    background-color: #FFFFFF;
-    border: 1px solid #E7E8E5;
-    border-top: 3px solid #307FE2;
-    border-radius: 14px;
-    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
-  }
-  .sanctuary-card--governance {
-    background-color: #FFFFFF;
-    border: 1px solid #E7E8E5;
-    border-top: 3px solid #8031A7;
-    border-radius: 14px;
-    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
-  }
-  /* Dark emphasis panel */
-  .sanctuary-card--dark {
-    background-color: #0D5257;
-    border: none;
-    border-radius: 14px;
-    box-shadow: 0 12px 32px rgba(13, 82, 87, 0.12);
-  }
-  
-  /* ---- Input controls / dropdowns ----------------------------- */
-  .sanctuary .sap-custom-dropdown {
-    color: #1A1A1A;
-    background-color: #FFFFFF;
-    border-color: #B4B7B8;
-    border-radius: 5px;
-  }
-  .sanctuary .sap-custom-input-field {
-    color: #1A1A1A;
-    background-color: #FFFFFF;
-    border-color: #B4B7B8;
-    border-radius: 5px;
-  }
-  
-  /* ---- Popups -------------------------------------------------- */
-  .sanctuary .sap-custom-popup {
-    background-color: #FDFDF5;
-  }
-  
+  background-color: #FDFDF5; /* Sanctuary cream — use #FFFFFF for pure white */
+}
+
+/* Default button = Sanctuary secondary */
+.sanctuary .sap-custom-button {
+  color: #0D5257;
+  background-color: #FFFFFF;
+  border-color: #B4B7B8;
+  border-radius: 5px;
+}
+.sanctuary .sap-custom-button:hover {
+  color: #0D5257;
+  background-color: #F1F1EC;
+  border-color: #B4B7B8;
+}
+.sanctuary .sap-custom-button:active {
+  color: #0D5257;
+  background-color: #E7E8E5;
+  border-color: #307FE2;
+}
+
+/* Default text */
+.sanctuary .sap-custom-text {
+  color: #3D3F40;
+}
+
+/* Chart title/subtitle text (SVG — uses fill) */
+.sanctuary .sap-custom-chart-title {
+  fill: #1A1A1A;
+  font-weight: bold;
+}
+.sanctuary .sap-custom-chart-subtitle {
+  fill: #5C5F61;
+}
+
+/* Popups */
+.sanctuary .sap-custom-popup {
+  background-color: #FDFDF5;
+}
+
+/* ============ BUTTON USE CASES ============================== */
+/* Primary action — "sanctuary-btn--primary" */
+.sanctuary-btn--primary .sap-custom-button {
+  color: #FFFFFF;
+  background-color: #307FE2;
+  border-color: #307FE2;
+  border-radius: 5px;
+}
+.sanctuary-btn--primary .sap-custom-button:hover {
+  color: #FFFFFF;
+  background-color: #1F62B8;
+  border-color: #1F62B8;
+}
+.sanctuary-btn--primary .sap-custom-button:active {
+  color: #307FE2;
+  background-color: #FFFFFF;
+  border-color: #307FE2;
+}
+
+/* Dark-teal emphasis — "sanctuary-btn--teal" */
+.sanctuary-btn--teal .sap-custom-button {
+  color: #FDFDF5;
+  background-color: #0D5257;
+  border-color: #0D5257;
+  border-radius: 5px;
+}
+.sanctuary-btn--teal .sap-custom-button:hover {
+  color: #FDFDF5;
+  background-color: #0A4146;
+  border-color: #0A4146;
+}
+.sanctuary-btn--teal .sap-custom-button:active {
+  color: #0D5257;
+  background-color: #FFFFFF;
+  border-color: #0D5257;
+}
+
+/* Low-emphasis / lite — "sanctuary-btn--lite" */
+.sanctuary-btn--lite .sap-custom-button {
+  color: #307FE2;
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 5px;
+}
+.sanctuary-btn--lite .sap-custom-button:hover {
+  color: #1F62B8;
+  background-color: #E3EDFF;
+  border-color: transparent;
+}
+.sanctuary-btn--lite .sap-custom-button:active {
+  color: #1F62B8;
+  background-color: #D3E2FA;
+  border-color: transparent;
+}
+
+/* Destructive — "sanctuary-btn--danger" */
+.sanctuary-btn--danger .sap-custom-button {
+  color: #C8102E;
+  background-color: #FFFFFF;
+  border-color: #C8102E;
+  border-radius: 5px;
+}
+.sanctuary-btn--danger .sap-custom-button:hover {
+  color: #C8102E;
+  background-color: #F8DEE2;
+  border-color: #C8102E;
+}
+
+/* ============ TEXT USE CASES ================================ */
+/* Page title — "sanctuary-text--h1" */
+.sanctuary-text--h1 .sap-custom-text {
+  color: #1A1A1A;
+  font-size: 28px;
+  font-weight: bold;
+}
+/* Section title — "sanctuary-text--h2" */
+.sanctuary-text--h2 .sap-custom-text {
+  color: #1A1A1A;
+  font-size: 22px;
+  font-weight: bold;
+}
+/* Widget title — "sanctuary-text--h3" */
+.sanctuary-text--h3 .sap-custom-text {
+  color: #1A1A1A;
+  font-size: 15px;
+  font-weight: bold;
+}
+/* Subtitle — "sanctuary-text--subtitle" */
+.sanctuary-text--subtitle .sap-custom-text {
+  color: #5C5F61;
+  font-size: 13px;
+}
+/* Eyebrow / kicker (type uppercase text in the widget itself) */
+.sanctuary-text--eyebrow .sap-custom-text {
+  color: #5C5F61;
+  font-size: 11px;
+  font-weight: bold;
+}
+/* Caption / footnote — "sanctuary-text--caption" */
+.sanctuary-text--caption .sap-custom-text {
+  color: #8A8D8F;
+  font-size: 12px;
+}
+/* On-dark text (for dark panels) — "sanctuary-text--inverse" */
+.sanctuary-text--inverse .sap-custom-text {
+  color: #FDFDF5;
+}
+/* KPI-style big number — "sanctuary-text--kpi" */
+.sanctuary-text--kpi .sap-custom-text {
+  color: #307FE2;
+  font-size: 34px;
+  font-weight: bold;
+}
+/* Variance good / bad — "sanctuary-text--good" / "--bad" */
+.sanctuary-text--good .sap-custom-text { color: #1F7A3D; font-weight: bold; }
+.sanctuary-text--bad  .sap-custom-text { color: #C8102E; font-weight: bold; }
+
+/* ============ CONTENT CARDS (Panels / Flow Layout Panels) ===== */
+/* Class alone — background/border/radius/shadow, like Horizon cards */
+/* Standard tile — "sanctuary-card" */
+.sanctuary-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E7E8E5;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
+}
+/* Flat tile (no shadow) — "sanctuary-card--flat" */
+.sanctuary-card--flat {
+  background-color: #FFFFFF;
+  border: 1px solid #E7E8E5;
+  border-radius: 14px;
+}
+/* Raised tile — "sanctuary-card--raised" */
+.sanctuary-card--raised {
+  background-color: #FFFFFF;
+  border: 1px solid #E7E8E5;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(26, 26, 26, 0.08);
+}
+/* Section-accent tiles (top rule in the report section colour) */
+.sanctuary-card--strategic {
+  background-color: #FFFFFF;
+  border: 1px solid #E7E8E5;
+  border-top: 3px solid #307FE2;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
+}
+.sanctuary-card--financial {
+  background-color: #FFFFFF;
+  border: 1px solid #E7E8E5;
+  border-top: 3px solid #0D5257;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
+}
+.sanctuary-card--governance {
+  background-color: #FFFFFF;
+  border: 1px solid #E7E8E5;
+  border-top: 3px solid #8031A7;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
+}
+.sanctuary-card--other {
+  background-color: #FFFFFF;
+  border: 1px solid #E7E8E5;
+  border-top: 3px solid #2E8540;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
+}
+/* Dark emphasis panel — "sanctuary-card--dark" (pair with
+   sanctuary-text--inverse on contained text widgets) */
+.sanctuary-card--dark {
+  background-color: #0D5257;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(13, 82, 87, 0.12);
+}
+
+/* ============ LAYOUT / STRUCTURE PANELS ====================== */
+/* Page header band (sticky-header layouts) — "sanctuary-header" */
+.sanctuary-header {
+  background-color: #FDFDF5;
+  border-bottom: 1px solid #E7E8E5;
+}
+/* Filter bar panel — "sanctuary-filterbar" */
+.sanctuary-filterbar {
+  background-color: #FFFFFF;
+  border: 1px solid #E7E8E5;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.06);
+}
+/* KPI strip panel — "sanctuary-kpi-strip" */
+.sanctuary-kpi-strip {
+  background-color: transparent;
+  border: none;
+}
+/* Sidebar / navigation rail panel — "sanctuary-rail" */
+.sanctuary-rail {
+  background-color: #0D5257;
+  border-radius: 0px;
+}
+/* Section divider band — "sanctuary-band" */
+.sanctuary-band {
+  background-color: #F1F1EC;
+  border-radius: 8px;
+}
+
+/* ============ INPUT CONTROLS ================================ */
+.sanctuary .sap-custom-dropdown {
+  color: #1A1A1A;
+  background-color: #FFFFFF;
+  border-color: #B4B7B8;
+  border-radius: 5px;
+}
+.sanctuary .sap-custom-input-field {
+  color: #1A1A1A;
+  background-color: #FFFFFF;
+  border-color: #B4B7B8;
+  border-radius: 5px;
+}
+.sanctuary sac-custom-radio-btn-group-row {
+  background-color: transparent;
+}
