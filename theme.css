@@ -1,0 +1,186 @@
+/* ============================================================
+   Sanctuary theme — SAP Analytics Cloud custom CSS
+   ------------------------------------------------------------
+   HOW TO USE
+   1. Story (optimized/enhanced mode): toolbar › Edit CSS — paste this.
+      Or Theme Preferences › "Enable Theme CSS" to package it into a
+      reusable theme, then "Reload Story CSS" after edits.
+   2. Set "sanctuary" as the Global Default Class Name in the canvas
+      Styling panel (Application Settings) so every widget inherits it.
+   3. Apply the modifier classes (sanctuary-btn--primary,
+      sanctuary-card, …) per widget via Styling panel › CSS Class Name.
+
+   SAC CSS RULES (per SAP docs)
+   - !important is NOT supported.
+   - The custom class name must come FIRST in every selector.
+   - Only selectors listed in the CSS editor's dropdown are supported
+     per widget; verify against your tenant version (2026.x).
+   - When a custom class is used alone (e.g. ".sanctuary"), only
+     background-color and border are allowed.
+   - Widget-specific classes override the global default class.
+   - Tables in optimized presentation mode may ignore some properties.
+   ============================================================ */
+
+/* ---- Global default class: canvas ------------------------- */
+/* Alone: only background-color / border are allowed. */
+.sanctuary {
+    background-color: #FDFDF5; /* Sanctuary cream canvas — use #FFFFFF for pure white */
+  }
+  
+  /* ---- Buttons ----------------------------------------------- */
+  /* Global default button = Sanctuary secondary style */
+  .sanctuary .sap-custom-button {
+    color: #0D5257;
+    background-color: #FFFFFF;
+    border-color: #B4B7B8;
+    border-radius: 5px;
+    font-family: 'Hanken Grotesk', '72', Arial, sans-serif;
+    font-weight: 700;
+  }
+  .sanctuary .sap-custom-button:hover {
+    color: #0D5257;
+    background-color: #F1F1EC;
+    border-color: #B4B7B8;
+  }
+  .sanctuary .sap-custom-button:active {
+    color: #0D5257;
+    background-color: #E7E8E5;
+    border-color: #307FE2;
+  }
+  
+  /* Primary action — apply class "sanctuary-btn--primary" to the widget */
+  .sanctuary-btn--primary .sap-custom-button {
+    color: #FFFFFF;
+    background-color: #307FE2;
+    border-color: #307FE2;
+    border-radius: 5px;
+    font-weight: 700;
+  }
+  .sanctuary-btn--primary .sap-custom-button:hover {
+    color: #FFFFFF;
+    background-color: #1F62B8;
+    border-color: #1F62B8;
+  }
+  .sanctuary-btn--primary .sap-custom-button:active {
+    color: #307FE2;
+    background-color: #FFFFFF;
+    border-color: #307FE2;
+  }
+  
+  /* Dark-teal emphasis — "sanctuary-btn--teal" */
+  .sanctuary-btn--teal .sap-custom-button {
+    color: #FDFDF5;
+    background-color: #0D5257;
+    border-color: #0D5257;
+    border-radius: 5px;
+    font-weight: 700;
+  }
+  .sanctuary-btn--teal .sap-custom-button:hover {
+    color: #FDFDF5;
+    background-color: #0A4146;
+    border-color: #0A4146;
+  }
+  
+  /* Low-emphasis / ghost — "sanctuary-btn--lite" */
+  .sanctuary-btn--lite .sap-custom-button {
+    color: #307FE2;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 5px;
+    font-weight: 700;
+  }
+  .sanctuary-btn--lite .sap-custom-button:hover {
+    color: #1F62B8;
+    background-color: #E3EDFF;
+    border-color: transparent;
+  }
+  
+  /* ---- Chart text -------------------------------------------- */
+  .sanctuary .sap-custom-chart-title {
+    fill: #1A1A1A;
+    font-family: 'Hanken Grotesk', '72', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .sanctuary .sap-custom-chart-subtitle {
+    fill: #5C5F61;
+    font-size: 13px;
+  }
+  
+  /* ---- Text widgets ------------------------------------------ */
+  .sanctuary .sap-custom-text {
+    color: #3D3F40;
+    font-family: 'Source Sans 3', '72', Arial, sans-serif;
+  }
+  /* Headline text widgets — "sanctuary-h1" */
+  .sanctuary-h1 .sap-custom-text {
+    color: #1A1A1A;
+    font-family: 'Hanken Grotesk', '72', Arial, sans-serif;
+    font-weight: 800;
+  }
+  /* Eyebrow / kicker — "sanctuary-eyebrow" */
+  .sanctuary-eyebrow .sap-custom-text {
+    color: #5C5F61;
+    font-family: 'Hanken Grotesk', '72', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  
+  /* ---- Content cards (Panels / Flow Layout Panels) ------------ */
+  /* Apply "sanctuary-card" to panels that should read as tiles.   */
+  .sanctuary-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E7E8E5;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
+  }
+  /* Section-accent variants (top rules echo the report sections) */
+  .sanctuary-card--financial {
+    background-color: #FFFFFF;
+    border: 1px solid #E7E8E5;
+    border-top: 3px solid #0D5257;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
+  }
+  .sanctuary-card--strategic {
+    background-color: #FFFFFF;
+    border: 1px solid #E7E8E5;
+    border-top: 3px solid #307FE2;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
+  }
+  .sanctuary-card--governance {
+    background-color: #FFFFFF;
+    border: 1px solid #E7E8E5;
+    border-top: 3px solid #8031A7;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
+  }
+  /* Dark emphasis panel */
+  .sanctuary-card--dark {
+    background-color: #0D5257;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(13, 82, 87, 0.12);
+  }
+  
+  /* ---- Input controls / dropdowns ----------------------------- */
+  .sanctuary .sap-custom-dropdown {
+    color: #1A1A1A;
+    background-color: #FFFFFF;
+    border-color: #B4B7B8;
+    border-radius: 5px;
+  }
+  .sanctuary .sap-custom-input-field {
+    color: #1A1A1A;
+    background-color: #FFFFFF;
+    border-color: #B4B7B8;
+    border-radius: 5px;
+  }
+  
+  /* ---- Popups -------------------------------------------------- */
+  .sanctuary .sap-custom-popup {
+    background-color: #FDFDF5;
+  }
+  
